@@ -93,28 +93,28 @@
                     </select>
 
                     <h3 ng-if="country_data">In {{country_name}}</h3>
-                    <div class="row text-center mb-5" ng-if="country_data">
+                    <div class="row mb-5" ng-if="country_data">
                         <div class="col-md-4">
-                            <div class="card bg-warning text-white">
+                            <div class="card ">
                                 <div class="card-body ">
-                                    <h3>Confirmed Cases</h3>
-                                    <h5>{{country_data.confirmed.value}}</h5>
+                                    <h3 class="text-left">Confirmed Cases</h3>
+                                    <h5 class="text-warning text-right">{{country_data.confirmed.value}}</h5>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="card bg-success text-white">
+                            <div class="card ">
                                 <div class="card-body">
-                                    <h3>Recovered Cases</h3>
-                                    <h5>{{country_data.recovered.value}}</h5>
+                                    <h3 class="text-left">Recovered Cases</h3>
+                                    <h5 class="text-success text-right">{{country_data.recovered.value}}</h5>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="card bg-danger text-white">
+                            <div class="card">
                                 <div class="card-body">
-                                    <h3>Deaths Cases</h3>
-                                    <h5>{{country_data.deaths.value}}</h5>
+                                    <h3 class="text-left">Deaths Cases</h3>
+                                    <h5 class="text-danger text-right">{{country_data.deaths.value}}</h5>
                                 </div>
                             </div>
                         </div>
