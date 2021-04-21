@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covid-19</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <script src="js/app.js"></script>
+</head>
+
+<body ng-app="MyApp" ng-controller="MyCtrl">
+
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <a class="navbar-brand ml-5" href="index.html">Co-Tracker</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <!-- <li >
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li> -->
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link mr-5" ng-click="downloadImage()" style="cursor:pointer">Download Poster</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link mr-5" onclick="sampleFunction()" style="cursor:pointer">Refresh</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <div class="jumbotron py-3">
+            <div class="container">
+                <h3 class="text-center">{{title}}</h3>
+                <h5 class="text-center">{{currentDate | date:'dd-mm-yyyy hh-mm-ss'}}</h5>
+                <!-- <p class="text-center">Coronavirus disease (COVID-19) is an infectious disease caused by a newly discovered coronavirus.</p> -->
+                <div class="container pt-4">
+                    <h3>In Global</h3>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body ">
+                                    <h3 class="text-left ">Confirmed Cases</h3>
+                                    <h5 class="text-right text-warning">{{all_data.confirmed.value}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="text-left">Recovered Cases</h3>
+                                    <h5 class="text-right text-success">{{all_data.recovered.value}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="text-left">Deaths Cases</h3>
+                                    <h5 class="text-danger text-right">{{all_data.deaths.value}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <input type="text" name="country" id="country" placeholder="Enter Country :" class="form-control mt-5"
+                ng-model="country_name" ng-change="get_country_data()"> -->
+
+                    <select class="form-control mt-4 mb-4" ng-model="country_name" ng-change="get_country_data()">
+                        <option value="">Select Country</option>
+                        <option ng-repeat="x in countries" ng-value="x.name">{{x.name}}</option>
+                    </select>
+
+                    <h3 ng-if="country_data">In {{country_name}}</h3>
+                    <div class="row text-center mb-5" ng-if="country_data">
+                        <div class="col-md-4">
+                            <div class="card bg-warning text-white">
+                                <div class="card-body ">
+                                    <h3>Confirmed Cases</h3>
+                                    <h5>{{country_data.confirmed.value}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-success text-white">
+                                <div class="card-body">
+                                    <h3>Recovered Cases</h3>
+                                    <h5>{{country_data.recovered.value}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-danger text-white">
+                                <div class="card-body">
+                                    <h3>Deaths Cases</h3>
+                                    <h5>{{country_data.deaths.value}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container pb-4 mb-6">
+        <p>Coronavirus disease (COVID-19) is an infectious disease caused by a newly discovered coronavirus.
+            Most people who fall sick with COVID-19 will experience mild to moderate symptoms and recover without special treatment.</p>
+
+        <header><u>HOW IT SPREADS</u></header>
+        <p class="details">The virus that causes COVID-19 is mainly transmitted through droplets generated when an infected person coughs, sneezes, or exhales. These droplets are too heavy to hang in the air, and quickly fall on floors or surfaces.
+            You can be infected by breathing in the virus if you are within close proximity of someone who has COVID-19, or by touching a contaminated surface and then your eyes, nose or mouth.</p>
+    </div>
+    <footer class="bg-dark text-light text-center text-lg-start fixed-bottom mt-6 pt-6">
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2021 Copyright:
+            <a class="text-dark"></a>
+        </div>
+    </footer>
+</body>
+
+</html>
